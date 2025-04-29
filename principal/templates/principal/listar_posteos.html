@@ -36,16 +36,13 @@
                         <td>{{ post.categoria }}</td>
                         <td>{{ post.fecha }}</td>
                         <td>
-                            <form action="{% url 'editar_posteo' post.titulo %}" method="get" style="display:inline;">
+                            <!--<form action="{% url 'editar_posteo' post.titulo %}" method="get" style="display:inline;">
 
                                 <button type="submit">Editarse</button>
-                            </form>
-                            <a href="/panel-admin" target="_blank">Panel de Administración</a>
-                            
-                            
-
-                          
-                          <a href="/eliminar_posteo/" class="btn btn-danger btn-sm">Eliminar</a>
+                            </form>  !-->
+                           
+                            <a href="{% url 'editar_posteo' post.id %}" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="{% url 'confirmar_eliminar' post.id %}" class="btn btn-danger btn-sm">Eliminar</a> 
                         </td>
                     </tr>
                     {% endfor %}

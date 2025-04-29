@@ -16,6 +16,8 @@ from bson import ObjectId
 def listar_posteos(request):
     coleccion_trabajos = conectar_db()
     posteos = list(coleccion_trabajos.find().sort("fecha", -1))
+    for post in posteos:
+        post["id"] = str(post["_id"])
     return render(request, "principal/listar_posteos.html", {"posteos": posteos})
 
 

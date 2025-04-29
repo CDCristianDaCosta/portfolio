@@ -28,38 +28,40 @@
     <div class="container" data-aos="fade-up">
         <div class="d-flex justify-content-center">
             <div class="col-lg-7">
-                <form action="." method="post" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="200">
+                <form  method="post" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="200">
                     {% csrf_token %}
                     <div class="row gy-4">
 
                         <div class="col-md-12">
                             <label for="titulo-field" class="pb-2">Título</label>
-                            <input type="text" id="titulo-field" name="titulo" class="form-control" value={{post.titulo}} required>
+                            <input type="text" id="titulo-field" name="titulo" class="form-control" value="{{ posteo.titulo }}" required>
                         </div>
 
                         <div class="col-md-12">
                             <label for="descripcion-field" class="pb-2">Descripción</label>
                             <textarea name="descripcion" id="descripcion-field" rows="5" class="form-control"
-                            value={{posteo.descripcion}}   required></textarea>
+                            required>{{ posteo.descripcion }} </textarea>
                         </div>
 
                         <div class="col-md-12">
                             <label for="categoria-field" class="pb-2">Categoría</label>
                             <select name="categoria" id="categoria-field" class="form-control">
-                                <option value="web">Web</option>
-                                <option value="django">Django</option>
-                                <option value="backend">Backend</option> value={{posteo.categoria}}
+                                <option value="web" {% if posteo.categoria == "web" %}selected{% endif %}>Web</option>
+                                <option value="django" {% if posteo.categoria == "django" %}selected{% endif %}>Django</option>
+                                <option value="backend" {% if posteo.categoria == "backend" %}selected{% endif %}>Backend</option>
                             </select>
                         </div>
+                                             
 
-                        <div class="col-md-12">
+                       <div class="col-md-12">
                             <label for="imagenes-field" class="pb-2">Seleccionar Archivos</label>
-                            <input type="file" name="imagenes" id="imagenes-field" class="form-control" multiple> 
+                            <input type="file" name="imagenes" id="imagenes-field" class="form-control"  multiple value={{imagen.name}}> 
+                            <img src="{{ posteo.imagen.url  }}" alt="Imagen" class="form-control" style="max-height: 200px;">
                         </div>
 
                         <div class="col-md-12">
                             <label for="fecha-field" class="pb-2">Fecha</label>
-                            <input type="date" name="fecha" id="fecha-field" class="form-control"> value={{posteo.fecha}}
+                            <input type="date" name="fecha" id="fecha-field" class="form-control" value={{posteo.fecha}}>
                         </div>
 
                         <div class="col-md-12 text-center">

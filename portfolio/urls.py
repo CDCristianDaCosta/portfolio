@@ -43,7 +43,9 @@ urlpatterns = [
         views.editar_posteo,
         name="editar_posteo",
     ),  # nuevo
-    path("eliminar/<str:id>/", views.eliminar_posteo, name="eliminar_posteo"),  # nuevo
+    path(
+        "eliminar/<str:id>/", views.eliminar_posteo, name="confirmar_eliminar"
+    ),  # nuevo
     path("portfolio-details/", views.portfolio, name="portfolio"),
     path("service-details/", views.service, name="service-details"),
     path("starter-page/", views.starter, name="starter-page"),
