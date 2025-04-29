@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block contenido %}
+<div class="container mt-5 text-center">
+    <h2>¿Estás seguro que querés eliminar este posteo?</h2>
+    <p><strong>{{ posteo.titulo }}</strong></p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{% url 'listar_posteos' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}
