@@ -51,13 +51,29 @@
                                 <option value="backend" {% if posteo.categoria == "backend" %}selected{% endif %}>Backend</option>
                             </select>
                         </div>
+
+
+                        <div class="col-md-12">
+                            <label for="imagen-field" class="pb-2">Seleccionar nueva imagen</label>
+                            <input type="file" name="imagenes" id="imagen-field" class="form-control">
+                        
+                            {% if posteo.imagenes and posteo.imagenes.0 %}
+                                <div class="mt-3">
+                                    <label class="pb-2">Imagen actual</label><br>
+                                    <img src="{{ posteo.imagenes.0 }}" alt="Imagen actual" class="img-thumbnail" style="max-height: 200px; max-width: 100%;">
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                        
+                        
                                              
 
-                       <div class="col-md-12">
+                       <!--<div class="col-md-12">
                             <label for="imagenes-field" class="pb-2">Seleccionar Archivos</label>
                             <input type="file" name="imagenes" id="imagenes-field" class="form-control"  multiple value={{imagen.name}}> 
-                            <img src="{{ posteo.imagen.url  }}" alt="Imagen" class="form-control" style="max-height: 200px;">
-                        </div>
+                            <img src="{{ post.imagen.url  }}" alt="Imagen" class="form-control" style="max-height: 200px;">
+                        </div> -->
 
                         <div class="col-md-12">
                             <label for="fecha-field" class="pb-2">Fecha</label>

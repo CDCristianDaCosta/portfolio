@@ -10,6 +10,7 @@ from .utils.conectar import conectar_db
 from .models import Post
 from .forms import PosteoForm  # lo creamos abajo
 from bson import ObjectId
+from datetime import datetime
 
 
 # inicio vista actualizar
@@ -40,6 +41,25 @@ def editar_posteo(request, id):
         categoria = request.POST["categoria"]
         fecha = request.POST["fecha"]
 
+        nueva_imagen = request.FILES.get("imagenes")
+        imagenes = posteo.get("imagenes", [])
+
+        # Si se subió una nueva imagen
+        if nueva_imagen:
+            nombre_archivo = (
+                f"{datetime.now().strftime('%Y%m%d%H%M%S')}_{nueva_imagen.name}"
+            )
+            ruta_archivo = os.path.join(settings.MEDIA_ROOT, nombre_archivo)
+
+            # Guardar el archivo en el sistema de archivos
+            with open(ruta_archivo, "wb+") as destino:
+                for chunk in nueva_imagen.chunks():
+                    destino.write(chunk)
+
+            # Guardar ruta relativa para usar en el HTML (empezando por /principal/media/)
+            ruta_guardada = os.path.join(settings.MEDIA_URL, nombre_archivo)
+            imagenes = [ruta_guardada]  # Reemplaza la imagen anterior
+
         coleccion_trabajos.update_one(
             {"_id": ObjectId(id)},
             {
@@ -48,6 +68,7 @@ def editar_posteo(request, id):
                     "descripcion": descripcion,
                     "categoria": categoria,
                     "fecha": fecha,
+                    "imagenes": imagenes,
                 }
             },
         )
